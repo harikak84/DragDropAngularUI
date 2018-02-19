@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { Ng2DragDropModule } from 'ng2-drag-drop';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    Ng2DragDropModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,18 +3,48 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+ 
+<div class="container">
+  <div class="row">
+  <div class="col-md-4">
+    <div class="col-left">      
+      <ul droppable (onDrop)="onItemDropBack($event)" [dropScope]="'left'" [dragHintClass]="'drop-hint'">
+          <li [draggable] *ngFor="let item of items" [dragData]="item" [dragScope]="'right'" [dragClass]="'selected-item'" [dragTransitClass]="'on-dragging-item'" onItemDropBack>{{item.name}}</li>
+          <p [style.display]="(items.length != 0) ? 'none' : 'block' ">Drop back items here</p>
+      </ul> 
+    </div>
+  </div>
+  <div class="col-md-8">
+      <div droppable class="dropbox" (onDrop)="onItemDrop($event)" [dropScope]="'right'" [dragHintClass]="'drop-hint'">
+        <div [draggable] [dragScope]="'left'" class="dropdown dropped-item" *ngFor="let ditem of droppedItems;let i = index;" [dragData]="ditem" [dragTransitClass]="'on-dragging-item'" onItemDrop (click)="dropdownForm(i)" >
+          <div class="dropdown-toggle" data-toggle="dropdown">
+          {{ditem.name}}
+          <span class="caret"></span></div>              
+          <div class="dropdown-menu" id="dropdown-{{i}}">
+              <form class="form-horizontal" action="#">
+                <div class="form-group">
+                  <label class="control-label col-sm-12" for="email">CMD NAME:</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="email" placeholder="Enter CMD Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-12" for="pwd">CMD OP:</label>
+                  <div class="col-sm-12"> 
+                    <input type="text" class="form-control" id="pwd" placeholder="Enter CMD OP">
+                  </div>
+                </div>
+                <div class="form-group"> 
+                  <div class="col-sm-12">
+                    <button type="button" class="btn btn-info">Submit</button>
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+        <p [style.visibility]="(droppedItems.length != 0) ? 'hidden' : 'visible' ">Drop items here</p>
+        </div>   
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+</div>
